@@ -1,0 +1,50 @@
+.subnav {
+  background: var(--bg-primary);
+  color: var(--text-secondary);
+  padding: 15px 0;
+  font-size: 14px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.subnav-inner {
+  height: 30px;
+}
+
+.subnav-links {
+  gap: 12px;
+}
+
+.subnav-links a,
+.subnav-links button {
+  display: inline-block;
+  padding: 6px 16px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.03);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-weight: 500;
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.subnav-links a:hover,
+.subnav-links button:hover {
+  background: rgba(255, 0, 127, 0.1);
+  color: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255, 0, 127, 0.15);
+}
+
+.nav-links-right {
+  font-size: 13px;
+}
+
+.nav-links-right li:first-child a {
+  background: linear-gradient(135deg, rgba(255,0,127,0.2) 0%, rgba(123,44,191,0.2) 100%);
+  color: #fff;
+  border: 1px solid rgba(255,0,127,0.3);
+}
+
+.nav-links-right li:first-child a:hover {
+  background: linear-gradient(135deg, rgba(255,0,127,0.4) 0%, rgba(123,44,191,0.4) 100%);
+  border-color: rgba(255,0,127,0.6);
+}

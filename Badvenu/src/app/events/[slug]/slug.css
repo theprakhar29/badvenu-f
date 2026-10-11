@@ -1,0 +1,125 @@
+.event-details-page {
+  padding: 40px 20px 80px;
+}
+
+.event-details-banner {
+  width: 100%;
+  max-height: 500px;
+  overflow: hidden;
+  border-radius: 20px;
+  background: #111;
+}
+
+.event-details-image {
+  width: 100%;
+  height: 100%;
+  max-height: 500px;
+  display: block;
+  object-fit: cover;
+}
+
+.event-details-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 380px;
+  gap: 40px;
+  margin-top: 40px;
+}
+
+.event-details-main h1 {
+  margin: 0 0 30px;
+  font-size: 42px;
+  line-height: 1.15;
+}
+
+.event-details-main h2,
+.event-booking-card h2 {
+  margin-bottom: 20px;
+}
+
+.event-description {
+  margin-bottom: 40px;
+}
+
+.event-description p {
+  line-height: 1.7;
+  white-space: pre-line;
+}
+
+.event-information {
+  margin-top: 30px;
+}
+
+.event-info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.event-booking-card {
+  align-self: start;
+  padding: 25px;
+  border-radius: 18px;
+  background: #111;
+  position: sticky;
+  top: 30px;
+}
+
+.event-starting-price {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 25px;
+}
+
+.event-starting-price strong {
+  font-size: 30px;
+}
+
+.ticket-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 25px;
+}
+
+.ticket-tier {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  padding: 15px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.05);
+}
+
+.ticket-tier p {
+  margin: 5px 0 0;
+  opacity: 0.7;
+}
+
+.ticket-availability {
+  font-size: 13px;
+  opacity: 0.7;
+  white-space: nowrap;
+}
+
+.booking-button {
+  width: 100%;
+  padding: 14px;
+}
+
+@media (max-width: 900px) {
+  .event-details-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .event-booking-card {
+    position: static;
+  }
+
+  .event-details-main h1 {
+    font-size: 32px;
+  }
+}

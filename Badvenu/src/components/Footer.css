@@ -1,0 +1,81 @@
+.footer {
+  background: var(--bg-primary);
+  color: var(--text-secondary);
+  padding-top: 40px;
+  border-top: 1px solid var(--border-color);
+}
+
+.footer-top {
+  padding-bottom: 30px;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 20px;
+}
+
+.footer-heading {
+  font-family: var(--font-heading);
+  font-size: 20px;
+  font-weight: 700;
+  background: linear-gradient(90deg, var(--brand-neon) 0%, var(--brand-accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 4px;
+}
+
+.footer-text {
+  font-size: 14px;
+}
+
+.contact-btn {
+  padding: 10px 24px;
+  font-size: 13px;
+}
+
+.footer-links-container {
+  padding: 20px 0 40px;
+  text-align: center;
+}
+
+.footer-logo {
+  margin-bottom: 24px;
+}
+
+.text-light {
+  color: var(--text-primary);
+  font-family: var(--font-heading);
+}
+
+.social-links {
+  margin-bottom: 30px;
+  gap: 16px;
+}
+
+.social-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(4px);
+  border: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.social-icon:hover {
+  background: rgba(255, 0, 127, 0.1);
+  color: var(--brand-neon);
+  transform: translateY(-5px);
+  border-color: rgba(255, 0, 127, 0.3);
+  box-shadow: 0 10px 20px rgba(255, 0, 127, 0.2);
+}
+
+.copyright-text {
+  font-size: 12px;
+  line-height: 1.6;
+  opacity: 0.6;
+  max-width: 800px;
+  margin: 0 auto;
+}

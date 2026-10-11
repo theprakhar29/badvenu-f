@@ -1,0 +1,127 @@
+.payment-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  background: #f7f7f8;
+}
+
+.payment-card {
+  width: 100%;
+  max-width: 520px;
+  background: white;
+  border-radius: 18px;
+  padding: 32px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+}
+
+.payment-header {
+  margin-bottom: 28px;
+}
+
+.eyebrow {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  margin-bottom: 8px;
+}
+
+.payment-header h1 {
+  margin: 0 0 8px;
+  font-size: 30px;
+}
+
+.payment-header p {
+  margin: 0;
+  color: #666;
+}
+
+.booking-summary {
+  border: 1px solid #e5e5e5;
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 22px;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 12px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.summary-row:last-child {
+  border-bottom: 0;
+}
+
+.summary-row span {
+  color: #666;
+}
+
+.summary-row strong {
+  text-align: right;
+}
+
+.summary-row.total {
+  margin-top: 6px;
+  padding-top: 18px;
+  font-size: 18px;
+}
+
+.pay-button {
+  width: 100%;
+  border: 0;
+  border-radius: 12px;
+  padding: 15px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  background: #111;
+  color: white;
+}
+
+.pay-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.payment-error {
+  padding: 13px 15px;
+  margin-bottom: 18px;
+  border-radius: 10px;
+  background: #fff1f1;
+  color: #b42318;
+  font-size: 14px;
+}
+
+.secure-note {
+  text-align: center;
+  margin-top: 16px;
+  font-size: 13px;
+  color: #777;
+}
+
+@media (max-width: 600px) {
+  .payment-page {
+    padding: 20px 14px;
+  }
+
+  .payment-card {
+    padding: 22px;
+  }
+
+  .payment-header h1 {
+    font-size: 25px;
+  }
+
+  .summary-row {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .summary-row strong {
+    text-align: left;
+  }
+}

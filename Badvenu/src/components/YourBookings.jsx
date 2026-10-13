@@ -1,16 +1,7 @@
 import React from 'react';
 import './MovieGrid.css';
 
-const bookings = [
-  { 
-    id: 1, 
-    title: 'The Dark Knight', 
-    date: 'Oct 15, 2026', 
-    time: '7:30 PM', 
-    seats: 'A1, A2', 
-    img: 'https://images.unsplash.com/photo-1509347528160-9a9e33742cdb?auto=format&fit=crop&q=80&w=300&h=450' 
-  },
-];
+const bookings = [];
 
 const YourBookings = () => {
   if (bookings.length === 0) return null;

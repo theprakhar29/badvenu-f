@@ -42,6 +42,13 @@ const bookingSchema = new Schema(
   {
     event: { type: Schema.Types.ObjectId, ref: "Event", required: true, index: true },
 
+    customer: {
+      type: Schema.Types.ObjectId,
+      ref: "Customer",
+      index: true,
+    },
+
+
     // Guest contact — captured per booking, no account required (per PRD).
     guestName: { type: String, required: true, trim: true },
     guestEmail: { type: String, trim: true, lowercase: true },

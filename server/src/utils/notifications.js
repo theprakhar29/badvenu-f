@@ -182,3 +182,79 @@ export async function deliverFailureNotice(booking, reason) {
     return [{ channel: "EMAIL", purpose: "PAYMENT_FAILED", to: booking.guestEmail, status: "FAILED", error: err.message, sentAt: new Date() }];
   }
 }
+
+
+export async function sendCustomerLoginOtp({ to, code }) {
+  const html = `
+    <div style="font-family:Arial,sans-serif;max-width:480px;margin:0 auto;padding:32px;background:#120A1F;color:#E8DCC4;border:1px solid #D4AF37;border-radius:12px;">
+      <h1 style="text-align:center;color:#D4AF37;letter-spacing:3px;">BADVENUE</h1>
+      <h2 style="color:#E8DCC4;">Your sign-in code</h2>
+      <p>Use the code below to securely sign in to your Badvenue customer account.</p>
+      <div style="text-align:center;padding:20px;background:#1E112A;border:1px solid #D4AF37;border-radius:8px;">
+        <span style="font-size:32px;font-weight:bold;letter-spacing:8px;color:#D4AF37;">${code}</span>
+      </div>
+      <p>This code expires in 10 minutes. Never share it with anyone.</p>
+      <p style="font-size:12px;color:#A99AB7;">If you did not request this code, you can ignore this email.</p>
+    </div>
+  `;
+
+  // Local development only: display the code when Resend is not configured.
+  if (!process.env.RESEND_API_KEY && process.env.NODE_ENV !== "production") {
+    console.log(`[customer OTP - development only] ${to}: ${code}`);
+    return;
+  }
+
+  await sendEmail({
+    to,
+    subject: "Your Badvenue sign-in code",
+    html,
+  });
+}
+
+
+export async function sendContactEnquiryNotification(message) {
+  const supportEmail = process.env.CONTACT_SUPPORT_EMAIL?.trim();
+
+  if (!supportEmail) {
+    throw new Error("CONTACT_SUPPORT_EMAIL is not configured.");
+  }
+
+  if (!process.env.RESEND_API_KEY) {
+    throw new Error("RESEND_API_KEY is not configured.");
+  }
+
+  // Escape user-supplied content before inserting it into HTML.
+  const escapeHtml = (value = "") =>
+    String(value).replace(/[&<>"']/g, (char) => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;",
+    })[char]);
+
+  const name = escapeHtml(message.name);
+  const email = escapeHtml(message.email);
+  const subject = escapeHtml(message.subject);
+  const body = escapeHtml(message.message).replace(/\n/g, "<br>");
+
+  await sendEmail({
+    to: supportEmail,
+    subject: `Badvenu Contact: ${message.subject}`,
+    html: `
+      <div style="font-family:Arial,sans-serif;max-width:600px;margin:auto;color:#222;">
+        <h2>New Badvenu Contact Enquiry</h2>
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Subject:</strong> ${subject}</p>
+        <hr />
+        <p><strong>Message:</strong></p>
+        <p style="line-height:1.6;">${body}</p>
+        <hr />
+        <p style="font-size:12px;color:#777;">
+          Enquiry ID: ${escapeHtml(message._id)}
+        </p>
+      </div>
+    `,
+  });
+}

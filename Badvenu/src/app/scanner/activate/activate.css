@@ -1,0 +1,46 @@
+.scanner-activation-page {
+  display: grid;
+  min-height: 100vh;
+  place-items: center;
+  padding: 24px;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.scanner-activation-card {
+  width: min(100%, 480px);
+  padding: 30px;
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  background: var(--bg-secondary);
+  text-align: center;
+}
+
+.scanner-activation-brand {
+  color: var(--brand-neon);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 3px;
+}
+
+.scanner-activation-card h1 {
+  margin: 14px 0;
+  font-size: 26px;
+}
+
+.scanner-activation-card p {
+  color: var(--text-secondary);
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+
+.scanner-activation-card button {
+  margin-top: 16px;
+  padding: 11px 18px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--brand-neon);
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}

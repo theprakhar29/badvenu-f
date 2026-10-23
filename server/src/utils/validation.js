@@ -27,6 +27,7 @@ export const eventDraftSchema = z.object({
   capacity: z.coerce.number().int().min(1).optional(),
   description: z.string().optional(),
   pricingTiers: z.array(pricingTierSchema).min(1, "Add at least one pricing tier"),
+  category: z.enum(["PLAYS", "STAND_UP", "SPORTS", "EVENTS", "ACTIVITIES"]).default("EVENTS"),
 });
 
 export const statusSchema = z.object({

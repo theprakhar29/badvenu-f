@@ -1,0 +1,196 @@
+.team-scanner-page {
+  min-height: 100vh;
+  padding: 28px 16px 48px;
+  background: #f4f5f8;
+  color: #172033;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.team-scanner-container {
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.team-scanner-header {
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.team-scanner-header > span {
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.team-scanner-header h1 {
+  margin: 8px 0;
+  font-size: clamp(28px, 4vw, 36px);
+}
+
+.team-scanner-header h2 {
+  margin: 8px 0;
+  font-size: 18px;
+}
+
+.team-scanner-header p {
+  color: #64748b;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.team-scanner-card,
+.team-scanner-result,
+.team-scanner-history {
+  margin-bottom: 22px;
+  padding: 22px;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  background: white;
+  box-shadow: 0 8px 28px rgb(15 23 42 / 5%);
+}
+
+.team-scanner-card h2,
+.team-scanner-history h2 {
+  margin: 0 0 16px;
+  font-size: 20px;
+}
+
+.team-scanner-camera {
+  width: 100%;
+  max-width: 520px;
+  min-height: 260px;
+  margin: 0 auto;
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  background: #111827;
+}
+
+.team-scanner-camera video {
+  width: 100% !important;
+  max-height: 440px;
+  object-fit: cover;
+}
+
+.team-scanner-status,
+.team-scanner-error {
+  margin-top: 12px;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.team-scanner-status {
+  color: #15803d;
+}
+
+.team-scanner-error {
+  color: #b91c1c;
+}
+
+.team-scanner-divider {
+  margin: 22px 0;
+  color: #94a3b8;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-align: center;
+}
+
+.team-scanner-card form {
+  display: grid;
+  gap: 10px;
+}
+
+.team-scanner-card label {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.team-scanner-card input {
+  width: 100%;
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 9px;
+  font: inherit;
+}
+
+.team-scanner-card button,
+.team-scanner-result button,
+.team-scanner-page .team-scanner-card + button {
+  min-height: 44px;
+  padding: 11px 16px;
+  border: 0;
+  border-radius: 9px;
+  background: #172033;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.team-scanner-card button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.team-scanner-result {
+  border: 2px solid #cbd5e1;
+}
+
+.team-scanner-result h2 {
+  margin: 0;
+  font-size: 22px;
+}
+
+.team-scanner-result p {
+  margin-top: 10px;
+  color: #475569;
+  line-height: 1.6;
+}
+
+.team-scanner-result button {
+  margin-top: 10px;
+}
+
+.team-scanner-history article {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 0;
+  border-top: 1px solid #e2e8f0;
+}
+
+.team-scanner-history article p,
+.team-scanner-history > p {
+  margin: 6px 0 0;
+  color: #64748b;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.team-scanner-history article span {
+  flex-shrink: 0;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.team-scanner-footer {
+  color: #64748b;
+  font-size: 12px;
+  line-height: 1.6;
+  text-align: center;
+}
+
+@media (max-width: 560px) {
+  .team-scanner-card,
+  .team-scanner-result,
+  .team-scanner-history {
+    padding: 16px;
+  }
+
+  .team-scanner-camera {
+    min-height: 220px;
+  }
+}

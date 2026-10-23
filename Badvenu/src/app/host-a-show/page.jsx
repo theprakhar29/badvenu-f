@@ -24,6 +24,7 @@ export default function HostShow() {
     eventDate: '',
     eventTime: '',
     eventVenue: '',
+    category: "EVENTS",
   });
 
   const [ticketTiers, setTicketTiers] = useState([
@@ -109,6 +110,7 @@ export default function HostShow() {
         city: "",
         startAt: startAt.toISOString(),
         description: formData.eventDescription,
+        category: formData.category,
         capacity: ticketTiers.reduce(
           (total, tier) => total + Number(tier.quantity),
           0
@@ -205,6 +207,7 @@ export default function HostShow() {
                       onChange={handleChange}
                     ></textarea>
                   </div>
+
                 </div>
               )}
 
@@ -267,6 +270,22 @@ export default function HostShow() {
                       onChange={handleChange}
                       required
                     ></textarea>
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="eventCategory">Event Category</label>
+                    <select
+                      id="eventCategory"
+                      name="category"
+                      value={formData.category}
+                      onChange={handleChange}
+                      required
+                    >
+                      <option value="PLAYS">Plays</option>
+                      <option value="STAND_UP">Stand-Up</option>
+                      <option value="SPORTS">Sports</option>
+                      <option value="EVENTS">Events & Concerts</option>
+                      <option value="ACTIVITIES">Activities & Workshops</option>
+                    </select>
                   </div>
                 </div>
               )}

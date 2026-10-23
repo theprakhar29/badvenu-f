@@ -32,6 +32,9 @@ export async function createEvent(req, res, next) {
       capacity: data.capacity,
       status: "DRAFT",
       pricingTiers: data.pricingTiers,
+
+      category: data.category,
+
     });
 
     res.status(201).json(event);
@@ -293,19 +296,67 @@ export async function uploadBanner(req, res, next) {
 }
 
 // GET /api/public/events — published events, for the home page listing
+
 export async function listPublishedEvents(req, res, next) {
   try {
-    const { city, q } = req.query;
-    const filter = { status: "PUBLISHED" };
-    if (city) filter.city = new RegExp(`^${city}$`, "i");
-    if (q) filter.title = new RegExp(q, "i");
+    const city =
+      typeof req.query.city === "string" ? req.query.city.trim() : "";
+    const q =
+      typeof req.query.q === "string" ? req.query.q.trim().slice(0, 100) : "";
+    const category =
+      typeof req.query.category === "string"
+        ? req.query.category.trim().toUpperCase()
+        : "";
 
-    const events = await Event.find(filter).sort({ startAt: 1 }).limit(24);
+    const filter = { status: "PUBLISHED" };
+
+    // Escape special regex characters so user input is treated as plain text.
+    const escapeRegex = (value) =>
+      value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
+    if (city) {
+      filter.city = new RegExp(`^${escapeRegex(city)}$`, "i");
+    }
+
+    if (category) {
+      const allowedCategories = [
+        "PLAYS",
+        "STAND_UP",
+        "SPORTS",
+        "EVENTS",
+        "ACTIVITIES",
+      ];
+
+      if (allowedCategories.includes(category)) {
+        filter.category = category;
+      } else {
+        return res.json([]);
+      }
+    }
+
+    if (q) {
+      const searchRegex = new RegExp(escapeRegex(q), "i");
+
+      filter.$or = [
+        { title: searchRegex },
+        { city: searchRegex },
+        { venueName: searchRegex },
+        { venueAddress: searchRegex },
+        { category: searchRegex },
+      ];
+    }
+
+    const events = await Event.find(filter)
+      .sort({ startAt: 1 })
+      .limit(50);
+
     res.json(events);
   } catch (err) {
     next(err);
   }
 }
+
+
 
 // GET /api/public/events/:slug — a single published event, for the public event page
 export async function getPublishedEventBySlug(req, res, next) {

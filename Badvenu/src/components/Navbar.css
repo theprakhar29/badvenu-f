@@ -82,3 +82,36 @@
   padding: 8px 24px;
   font-size: 13px;
 }
+
+.search-submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.search-submit .search-icon {
+  margin-right: 0;
+}
+
+.search-clear {
+  color: var(--text-secondary);
+  font-size: 22px;
+  line-height: 1;
+  padding: 0 2px;
+}
+
+.search-clear:hover {
+  color: var(--text-primary);
+}
+
+.search-input {
+  min-width: 0;
+}
+
+.navbar-profile-link{
+  padding: 5px 20px;
+  font-size: 15px;
+  /* border-color: rgba(255,0,127,0.6); */
+   /* color: var(--text-primary); */
+}

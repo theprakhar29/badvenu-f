@@ -434,13 +434,27 @@ export default function HostDashboard() {
                   </button>
 
                 )}
+
                 <Link href={`/host-dashboard/scanner/${event._id}`}
                   className="btn-secondary"
                   style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '5px' }}
                 >
                   Scan Tickets
                 </Link>
-              </span>
+                </span>
+
+              <Link
+                href={`/host-dashboard/scanner-links/${event._id}`}
+                className="btn-primary"
+                style={{
+                  textDecoration: "none",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "5px",
+                }}
+                >
+                Manage Entry Team
+              </Link>
             </div>
 
             <div className="event-meta">

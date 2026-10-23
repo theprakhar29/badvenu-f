@@ -98,3 +98,124 @@
   transform: scale(1.5);
   box-shadow: 0 0 10px var(--brand-neon);
 }
+.carousel-message {
+  min-height: 260px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  color: white;
+  text-align: center;
+}
+
+.hero-event-link {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  color: inherit;
+  text-decoration: none;
+}
+
+.hero-event-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 36px;
+  color: white;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.88) 0%,
+    rgba(0, 0, 0, 0.48) 48%,
+    rgba(0, 0, 0, 0.05) 100%
+  );
+}
+
+.hero-event-overlay h2 {
+  max-width: 700px;
+  margin: 0;
+  font-size: clamp(26px, 4vw, 46px);
+  font-weight: 800;
+  line-height: 1.12;
+}
+
+.hero-event-overlay p {
+  margin: 0;
+  font-size: 15px;
+}
+
+.hero-event-badge {
+  padding: 7px 12px;
+  border-radius: 20px;
+  background: var(--brand-neon, #ff007f);
+  color: white;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.hero-event-date {
+  opacity: 0.9;
+}
+
+.hero-event-cta {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 11px 18px;
+  border-radius: 8px;
+  background: var(--brand-neon, #ff007f);
+  color: white;
+  font-weight: 700;
+  transition: transform 0.2s ease;
+}
+
+.hero-event-link:hover .hero-event-cta {
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .hero-carousel-wrapper {
+    padding: 24px 12px;
+  }
+
+  .carousel-container {
+    border-radius: 16px;
+  }
+
+  .carousel-slide {
+    height: 320px;
+  }
+
+  .hero-event-overlay {
+    padding: 22px;
+    background: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.9) 0%,
+      rgba(0, 0, 0, 0.4) 75%,
+      rgba(0, 0, 0, 0.1) 100%
+    );
+  }
+
+  .hero-event-overlay p {
+    font-size: 13px;
+  }
+
+  .carousel-nav {
+    width: 38px;
+    height: 38px;
+    opacity: 1;
+  }
+
+  .prev-btn {
+    left: 8px;
+  }
+
+  .next-btn {
+    right: 8px;
+  }
+}

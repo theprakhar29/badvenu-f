@@ -6,9 +6,11 @@ import authRoutes from "./routes/auth.routes.js";
 import eventRoutes from "./routes/event.routes.js";
 import publicRoutes from "./routes/public.routes.js";
 import scannerRoutes from "./routes/scanner.routes.js";
+import customerAuthRoutes from "./routes/customer-auth.routes.js";
 import { razorpayWebhook } from "./controllers/payment.controller.js";
 import { notFoundHandler, errorHandler } from "./middleware/errorHandler.js";
 import { logger } from "./utils/logger.js";
+import contactRoutes from "./routes/contact.routes.js";
 
 export function createApp() {
   const app = express();
@@ -18,7 +20,7 @@ export function createApp() {
   // Vercel's per-branch/PR preview URLs if you use those. Each must be an
   // exact origin (scheme + host + port), no trailing slash, no wildcard —
   // e.g. "https://badvenue.vercel.app,https://badvenue-git-dev.vercel.app".
-  const allowedOrigins = (process.env.CLIENT_ORIGIN || "http://192.168.1.7:5173")
+  const allowedOrigins = (process.env.CLIENT_ORIGIN || "http://localhost:3000")
     .split(",")
     .map((o) => o.trim())
     .filter(Boolean);
@@ -58,10 +60,11 @@ export function createApp() {
   app.get("/api/health", (req, res) => res.json({ status: "ok" }));
 
   app.use("/api/auth", authRoutes);
+  app.use("/api/customer-auth", customerAuthRoutes);
   app.use("/api/events", eventRoutes);
   app.use("/api/public", publicRoutes);
   app.use("/api/scanner", scannerRoutes);
-
+  app.use("/api/contact", contactRoutes);
   app.use(notFoundHandler);
   app.use(errorHandler);
 

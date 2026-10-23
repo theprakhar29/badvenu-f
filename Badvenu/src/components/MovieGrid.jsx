@@ -1,32 +1,153 @@
-import React from 'react';
-import MovieCard from './MovieCard';
-import { ChevronRight } from 'lucide-react';
-import './MovieGrid.css';
+"use client";
 
-const movies = [
-  { id: 1, title: 'Inception', genre: 'Action/Sci-Fi', rating: '8.8', votes: '2.2M', img: 'https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?auto=format&fit=crop&q=80&w=300&h=450' },
-  { id: 2, title: 'Interstellar', genre: 'Adventure/Drama/Sci-Fi', rating: '8.6', votes: '1.6M', img: 'https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&q=80&w=300&h=450' },
-  { id: 3, title: 'The Dark Knight', genre: 'Action/Crime/Drama', rating: '9.0', votes: '2.5M', img: 'https://images.unsplash.com/photo-1509347528160-9a9e33742cdb?auto=format&fit=crop&q=80&w=300&h=450' },
-  { id: 4, title: 'Avatar', genre: 'Action/Adventure/Fantasy', rating: '7.8', votes: '1.2M', img: 'https://images.unsplash.com/photo-1518779578993-ec3579fee39f?auto=format&fit=crop&q=80&w=300&h=450' },
-  { id: 5, title: 'The Matrix', genre: 'Action/Sci-Fi', rating: '8.7', votes: '1.8M', img: 'https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&q=80&w=300&h=450' },
-];
+import React, { useEffect, useState } from "react";
+import Link from "next/link";
+import { ChevronRight } from "lucide-react";
+import { getPublishedEvents } from "../services/event.service";
+import { API_URL } from "../lib/api";
+import "./MovieGrid.css";
 
 const MovieGrid = () => {
+  const [events, setEvents] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    let isMounted = true;
+
+    async function loadEvents() {
+      try {
+        const response = await getPublishedEvents();
+
+        const eventList = Array.isArray(response)
+          ? response
+          : response?.events || [];
+
+        // Prefer events with banner images, then show up to five.
+        const recommended = [...eventList]
+          .sort(
+            (a, b) =>
+              Number(Boolean(b.bannerUrl)) -
+              Number(Boolean(a.bannerUrl))
+          )
+          .slice(0, 5);
+
+        if (isMounted) {
+          setEvents(recommended);
+        }
+      } catch (err) {
+        console.error("Failed to load recommendations:", err);
+
+        if (isMounted) {
+          setError("Recommendations are temporarily unavailable.");
+        }
+      } finally {
+        if (isMounted) {
+          setLoading(false);
+        }
+      }
+    }
+
+    loadEvents();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
   return (
     <section className="section-container">
       <div className="container">
         <div className="section-header flex items-center justify-between">
-          <h2 className="section-title">Recommendations of the Week</h2>
-          <a href="#" className="see-all flex items-center">
-            See All <ChevronRight size={16} />
-          </a>
+          <h2 className="section-title">
+            Recommendations of the Week
+          </h2>
+
+          <Link href="/category/events" className="see-all flex items-center">
+            Explore Events <ChevronRight size={16} />
+          </Link>
         </div>
-        
-        <div className="movie-grid">
-          {movies.map(movie => (
-            <MovieCard key={movie.id} {...movie} />
-          ))}
-        </div>
+
+        {loading && <p>Finding events for you...</p>}
+
+        {!loading && error && <p>{error}</p>}
+
+        {!loading && !error && events.length === 0 && (
+          <p>No published events to recommend yet. Check back soon!</p>
+        )}
+
+        {!loading && !error && events.length > 0 && (
+          <div className="movie-grid">
+            {events.map((event) => {
+              const eventDate = event.startAt
+                ? new Date(event.startAt)
+                : null;
+
+              const dateLabel =
+                eventDate && !Number.isNaN(eventDate.getTime())
+                  ? eventDate.toLocaleDateString("en-IN", {
+                      day: "numeric",
+                      month: "short",
+                      year: "numeric",
+                    })
+                  : "Date to be announced";
+
+              const prices = (event.pricingTiers || [])
+                .map((tier) => Number(tier.price))
+                .filter((price) => Number.isFinite(price) && price >= 0);
+
+              const lowestPrice =
+                prices.length > 0 ? Math.min(...prices) : null;
+
+              const imageUrl = event.bannerUrl
+                ? event.bannerUrl.startsWith("http")
+                  ? event.bannerUrl
+                  : `${API_URL}${event.bannerUrl}`
+                : "/favicon.svg";
+
+              return (
+                <Link
+                  href={`/events/${event.slug}`}
+                  key={event._id || event.id || event.slug}
+                  className="movie-card"
+                >
+                  <div className="img-container">
+                    <img
+                      src={imageUrl}
+                      alt={event.title || "Badvenu event"}
+                      className="movie-poster"
+                    />
+
+                    <div className="rating-bar">
+                      <span className="rating-score">
+                        {event.category || "EVENT"}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="movie-details">
+                    <h3 className="movie-title" title={event.title}>
+                      {event.title}
+                    </h3>
+
+                    <p className="movie-genre">{dateLabel}</p>
+
+                    <p className="movie-genre">
+                      {event.venueName || "Venue TBA"}
+                      {event.city ? ` · ${event.city}` : ""}
+                    </p>
+
+                    <p className="movie-genre">
+                      {lowestPrice !== null
+                        ? `Starting from ₹${lowestPrice}`
+                        : "Check ticket prices"}
+                    </p>
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+        )}
       </div>
     </section>
   );

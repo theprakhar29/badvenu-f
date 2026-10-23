@@ -50,3 +50,22 @@ export const cookieOptions = {
   path: "/",
   maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
 };
+
+export const customerCookieOptions = {
+  ...cookieOptions,
+};
+
+export function signCustomerToken(customer) {
+  return jwt.sign(
+    {
+      customerId: customer._id.toString(),
+      email: customer.email,
+      name: customer.name,
+      role: "customer",
+    },
+    process.env.JWT_SECRET,
+    { expiresIn: "7d" }
+  );
+}
+
+export const CUSTOMER_SESSION_COOKIE = "customer_session";

@@ -63,6 +63,12 @@ const eventSchema = new Schema(
       type: [formFieldSchema],
       default: () => DEFAULT_FORM_FIELDS.map((f) => ({ ...f })),
     },
+    category: {
+      type: String,
+      enum: ["PLAYS", "STAND_UP", "SPORTS", "EVENTS", "ACTIVITIES"],
+      default: "EVENTS",
+      index: true,
+    },
   },
   { timestamps: true }
 );

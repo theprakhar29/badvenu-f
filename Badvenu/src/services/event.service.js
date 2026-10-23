@@ -2,23 +2,18 @@ import { apiFetch } from "../lib/api";
 
 // ---------- PUBLIC ----------
 
-export async function getPublishedEvents({ city, q } = {}) {
+export async function getPublishedEvents({ city, q, category } = {}) {
   const params = new URLSearchParams();
 
-  if (city) {
-    params.set("city", city);
-  }
-
-  if (q) {
-    params.set("q", q);
-  }
+  if (city) params.set("city", city);
+  if (q) params.set("q", q);
+  if (category) params.set("category", category);
 
   const query = params.toString();
 
-  return apiFetch(
-    `/api/public/events${query ? `?${query}` : ""}`
-  );
+  return apiFetch(`/api/public/events${query ? `?${query}` : ""}`);
 }
+
 
 export async function getPublishedEventBySlug(slug) {
   return apiFetch(`/api/public/events/${slug}`);

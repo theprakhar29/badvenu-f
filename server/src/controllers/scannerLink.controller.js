@@ -42,7 +42,8 @@ export async function createScannerLink(req, res, next) {
 export async function listScannerLinks(req, res, next) {
   try {
     await assertOwnedEvent(req.params.id, req.organizer.organizerId);
-    const links = await ScannerLink.find({ event: req.params.id }).sort({ createdAt: -1 });
+    // const links = await ScannerLink.find({ event: req.params.id }).sort({ createdAt: -1 });
+    const links = await ScannerLink.find({ event: req.params.id }).select("-token").sort({ createdAt: -1 });
     res.json(links);
   } catch (err) {
     next(err);

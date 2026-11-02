@@ -1,7 +1,7 @@
 // next.config.js
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  allowedDevOrigins: ['http://localhost:3000'],
+  allowedDevOrigins: ['0.0.0.0'],
 };
 
 module.exports = nextConfig;
